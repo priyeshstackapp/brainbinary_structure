@@ -1,4 +1,5 @@
 import 'package:brainbinary_structure/screen/country/country_view_model.dart';
+import 'package:brainbinary_structure/screen/country/widget/country_list_item.dart';
 import 'package:brainbinary_structure/utils/app.dart';
 import 'package:brainbinary_structure/utils/color_res.dart';
 import 'package:brainbinary_structure/utils/common_widgets.dart';
@@ -31,7 +32,8 @@ class CountryScreenState extends State<CountryScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     model.disposers ??= [
-      reaction((_) => model.countryStore.currentStatus, (StoreStatus message) async {
+      reaction((_) => model.countryStore.currentStatus,
+          (StoreStatus message) async {
         if (message != null && message == StoreStatus.success) {
           model.isLoading = false;
           model.countryModel = model.countryStore.response.result;
@@ -51,40 +53,23 @@ class CountryScreenState extends State<CountryScreen> {
       appBar: AppBar(
         title: Text(AppRes.country),
       ),
-      body: model.isLoading ? Center(
-        child: CircularProgressIndicator(),
-      ) : ListView.builder(
-        itemCount: model.countryModel.data.length > 30
-            ? 30
-            : model.countryModel.data.length,
-        itemBuilder: (context, index) => InkWell(
-          onTap: () => model.countryItemClick(index),
-          child: Card(
-            elevation: 2,
-            child: Container(
-              height: 50,
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "${model.countryModel.data[index].country}",
-                    style: AppTextStyle(
-                      weight: FontWeight.w500,
-                      size: 16,
-                      textColor: ColorRes.black,
-                    ),
-                  ),
-                  model.selectedCountry == index
-                      ? Icon(Icons.check_circle)
-                      : SizedBox()
-                ],
+      body: model.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: model.countryModel.data.length > 30
+                  ? 30
+                  : model.countryModel.data.length,
+              itemBuilder: (context, index) => InkWell(
+                onTap: () => model.countryItemClick(index),
+                child: CountryListItem(
+                  model.countryModel.data[index].country,
+                  model.selectedCountry,
+                  index,
+                ),
               ),
             ),
-          ),
-        ),
-      ),
       bottomNavigationBar: BottomBar(
         onContinue: () => model.continueClick(model.selectedCountry),
         onBack: () {},

@@ -1,4 +1,5 @@
 import 'package:brainbinary_structure/screen/city/city_view_model.dart';
+import 'package:brainbinary_structure/screen/city/widget/city_list_item.dart';
 import 'package:brainbinary_structure/utils/app.dart';
 import 'package:brainbinary_structure/utils/color_res.dart';
 import 'package:brainbinary_structure/utils/common_widgets.dart';
@@ -65,28 +66,10 @@ class CityScreenState extends State<CityScreen> {
                   model.cities.data.length > 30 ? 30 : model.cities.data.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () => model.countryItemClick(index),
-                child: Card(
-                  elevation: 2,
-                  child: Container(
-                    height: 50,
-                    padding: const EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${model.cities.data[index].city}",
-                          style: AppTextStyle(
-                            weight: FontWeight.w500,
-                            size: 16,
-                            textColor: ColorRes.black,
-                          ),
-                        ),
-                        model.selectedCity == index
-                            ? Icon(Icons.check_circle)
-                            : SizedBox()
-                      ],
-                    ),
-                  ),
+                child: CityListItem(
+                  model.cities.data[index].city,
+                  model.selectedCity,
+                  index,
                 ),
               ),
             ),
