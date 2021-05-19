@@ -28,3 +28,7 @@ Change `MaterialApp` to `GetMaterialApp`
 - Back to previous screen  
   
 	  Get.back();
+	  
+### Generate .g file
+
+flutter packages pub run build_runner build --delete-conflicting-outputs
