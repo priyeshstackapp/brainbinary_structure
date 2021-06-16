@@ -5,7 +5,7 @@ This is the BrainBinary flutter projects structure.
 ## Key points
   
 - ViewModel  
-- MobX for API response handling  
+- MVVM repo => view_model  
 - GetX context management  
 - Resource globalization  
   
