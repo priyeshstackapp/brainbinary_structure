@@ -1,4 +1,4 @@
-import 'package:brainbinary_structure/screen/country/country.dart';
+import 'package:brainbinary_structure/screen/country/country_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Country(),
+      home: CountryScreen(),
     );
   }
 }
