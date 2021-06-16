@@ -18,13 +18,7 @@ dependencies:
   http: ^0.13.3
 
   # state management
-  rxdart: ^0.26.0
   get: ^4.1.4
-
-  mobx: ^1.2.1+4
-  flutter_mobx: ^1.1.0+2
-  build_runner: ^1.10.11
-  mobx_codegen: ^1.1.2
 
 dev_dependencies:
   flutter_test:

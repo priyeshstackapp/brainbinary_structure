@@ -1,8 +1,7 @@
 import 'package:brainbinary_structure/model/city_model.dart';
+import 'package:brainbinary_structure/rest_api/country_rest_api.dart';
 import 'package:brainbinary_structure/screen/city/city_screen.dart';
-import 'package:brainbinary_structure/store/city/city_store.dart';
 import 'package:get/get.dart';
-import 'package:mobx/mobx.dart';
 
 class CityViewModel {
   CityScreenState state;
@@ -10,15 +9,10 @@ class CityViewModel {
   CityModel cities;
 
   int selectedCity = -1;
-  bool isLoading = false;
-
-  CityStore cityStore = CityStore();
-  List<ReactionDisposer> disposers;
-
+  bool isLoading = true;
 
   CityViewModel(this.state) {
-    isLoading = true;
-    cityStore.getCity(state.widget.country);
+    getCity(state.widget.country);
   }
 
   countryItemClick(int index) async {
@@ -40,5 +34,11 @@ class CityViewModel {
         "Coming soon",
       );
     }
+  }
+
+  void getCity(String country) async {
+    cities = await RestApi.getCity(country);
+    isLoading = false;
+    state.setState(() {});
   }
 }

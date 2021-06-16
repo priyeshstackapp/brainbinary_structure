@@ -1,24 +1,19 @@
 import 'package:brainbinary_structure/model/country_model.dart';
+import 'package:brainbinary_structure/rest_api/country_rest_api.dart';
 import 'package:brainbinary_structure/screen/city/city_screen.dart';
 import 'package:brainbinary_structure/screen/country/country_screen.dart';
-import 'package:brainbinary_structure/store/country/country_store.dart';
 import 'package:get/get.dart';
-import 'package:mobx/mobx.dart';
 
 class CountryViewModel {
   CountryScreenState state;
 
-  CountryModel countryModel = CountryModel();
+  CountryModel countryModel;
 
   int selectedCountry = -1;
-  bool isLoading = false;
-
-  CountryStore countryStore = CountryStore();
-  List<ReactionDisposer> disposers;
+  bool isLoading = true;
 
   CountryViewModel(this.state) {
-    isLoading = true;
-    countryStore.getCountry();
+    getCountry();
   }
   
   countryItemClick(int index) async {
@@ -37,5 +32,13 @@ class CountryViewModel {
     } else {
       Get.to(()=> CityScreen(countryModel.data[data].country));
     }
+  }
+
+
+
+  void getCountry() async {
+    countryModel = await RestApi.getCountry();
+    isLoading = false;
+    state.setState(() {});
   }
 }
