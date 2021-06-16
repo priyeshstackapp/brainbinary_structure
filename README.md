@@ -4,8 +4,7 @@ This is the BrainBinary flutter projects structure.
   
 ## Key points
   
-- ViewModel  
-- MobX for API response handling  
+- MVVM  
 - GetX context management  
 - Resource globalization  
   
@@ -29,6 +28,3 @@ Change `MaterialApp` to `GetMaterialApp`
   
 	  Get.back();
 	  
-### Generate .g file
-
-flutter packages pub run build_runner build --delete-conflicting-outputs
