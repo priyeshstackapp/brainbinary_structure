@@ -6,6 +6,7 @@ This is the BrainBinary flutter projects structure.
   
 - ViewModel  
 - MobX for API response handling  
+- RxDart state management
 - GetX context management  
 - Resource globalization  
   
